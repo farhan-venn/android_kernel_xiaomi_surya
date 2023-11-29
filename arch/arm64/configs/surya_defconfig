@@ -45,6 +45,9 @@ CONFIG_THREAD_INFO_IN_TASK=y
 # simple gpu algorithm
 CONFIG_SIMPLE_GPU_ALGORITHM=y
 
+# adreno idler
+CONFIG_ADRENO_IDLER=y
+
 #
 # General setup
 #
