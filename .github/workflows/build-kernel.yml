@@ -21,7 +21,7 @@ jobs:
 
       - name: Run build script
         run: |
-          source compile.sh
+          source build.sh
           echo "ZIPNAME=${ZIPNAME}" >> $GITHUB_ENV
 
       - name: Setup build date
