@@ -45,7 +45,7 @@ export PATH=${CLANG_PATH}/bin:${PATH}
 export ARCH=arm64
 export DATE=$(TZ=Asia/Jakarta date)
 # Kernel groups
-CI_CHANNEL=-1001488385343
+CI_CHANNEL=-1001592026548
 
 # Kernel revision
 KERNELRELEASE=surya
