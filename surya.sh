@@ -7,11 +7,11 @@
 # CI build script
 
 # Needed exports
-export TELEGRAM_TOKEN=1157809262:AAHNbCHG-XcjgpGuDflcTX8Z_OJiXcjdDr0
+export TELEGRAM_TOKEN=7156614633:AAEcv-ttSka3mH8wS45usUlpRW4FbqgT8xQ
 export ANYKERNEL=$(pwd)/anykernel3
 
 # Avoid hardcoding things
-KERNEL=𝐏𝐫𝐞𝐝𝐚𝐭𝐨𝐑
+KERNEL=RavenKernel
 DEFCONFIG=surya_defconfig
 CIPROVIDER=CircleCI
 PARSE_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
@@ -83,17 +83,17 @@ tg_channelcast() {
 
 # Fix long kernel strings
 kernelstringfix() {
-    git config --global user.name "predator112"
-    git config --global user.email "mi460334@gmail.com"
+    git config --global user.name "farhan-venn"
+    git config --global user.email "ankarsa1287@gmail.com"
     git add .
-    git commit -m "stop adding dirty"
+    git commit -m "New Build"
 }
 
 # Make the kernel
 makekernel() {
     # Clean any old AnyKernel
     rm -rf ${ANYKERNEL}
-    git clone https://github.com/Aex-Mod/AnyKernel3 -b surya anykernel3
+    git clone https://github.com/farhan-venn/AnyKernel3 -b Raven
     kernelstringfix
     make O=out ARCH=arm64 ${DEFCONFIG}
     if [[ "${COMPILER_TYPE}" =~ "clang"* ]]; then
@@ -142,26 +142,10 @@ shipkernel() {
 }
 
 # Ship China firmware builds
-setksu() {
-    export KSU=KSU
-    # Pick DSP change
-    sed -i 's/CONFIG_KSU=n/CONFIG_KSU=y/g' arch/arm64/configs/${DEFCONFIG}
-    echo -e "KSU ready"
-}
-
-# Ship China firmware builds
 clearout() {
     # Pick DSP change
     rm -rf out
     mkdir -p out
-}
-
-#Setver 2 for ksu
-setver2() {
-    KERNELNAME="${KERNEL}-${KERNELRELEASE}-KSU-${ZIP_DATE}"
-    export KERNELTYPE KERNELNAME
-    export TEMPZIPNAME="${KERNELNAME}-unsigned.zip"
-    export ZIPNAME="${KERNELNAME}.zip"
 }
 
 ## Start the kernel buildflow ##
@@ -180,8 +164,6 @@ tg_channelcast "Docker OS: <code>$DISTRO</code>" \
 START=$(date +"%s")
 makekernel || exit 1
 shipkernel
-setksu
-setver2
 makekernel || exit 1
 shipkernel
 END=$(date +"%s")
