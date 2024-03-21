@@ -18,11 +18,24 @@ export KBUILD_BUILD_HOST=Farhan
 
 # change TC_DIR(directory) on where you clone clang toolchain
 
-TC_DIR="/home/raven/kernel/clang-17"
+# TC_DIR="/home/raven/kernel/clang-17"
 
 # do not modify export PATCH it's been including with TC_DIR
 
 export PATH="$TC_DIR/bin:$PATH"
+
+if ! [ -d "$TC_DIR" ]; then
+	echo "Neutron Clang not found! Downloading to $TC_DIR..."
+	mkdir -p "$TC_DIR" && cd "$TC_DIR"
+	curl -LO "https://raw.githubusercontent.com/Neutron-Toolchains/antman/main/antman"
+	bash ./antman -S
+	bash ./antman --patch=glibc
+	cd ../..
+	if ! [ -d "$TC_DIR" ]; then
+		echo "Cloning failed! Aborting..."
+		exit 1
+	fi
+fi
 
 if test -z "$(git rev-parse --show-cdup 2>/dev/null)" &&
    head=$(git rev-parse --verify HEAD 2>/dev/null); then
