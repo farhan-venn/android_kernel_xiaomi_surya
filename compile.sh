@@ -18,7 +18,7 @@ export KBUILD_BUILD_HOST=Farhan
 
 # change TC_DIR(directory) on where you clone clang toolchain
 
-TC_DIR="$(pwd)/tc/clang-neutron"
+export PATH="$HOME/toolchains/proton-clang/bin:$PATH"
 
 # do not modify export PATCH it's been including with TC_DIR
 
@@ -26,23 +26,6 @@ if test -z "$(git rev-parse --show-cdup 2>/dev/null)" &&
    head=$(git rev-parse --verify HEAD 2>/dev/null); then
 	ZIPNAME="${ZIPNAME::-4}-$(echo $head | cut -c1-8).zip"
 fi
-
-export PATH="$TC_DIR/bin:$PATH"
-
-if ! [ -d "$TC_DIR" ]; then
-	echo "Neutron Clang not found! Downloading to $TC_DIR..."
-	mkdir -p "$TC_DIR" && cd "$TC_DIR"
-	curl -LO "https://raw.githubusercontent.com/Neutron-Toolchains/antman/main/antman"
-	bash ./antman -S
-	bash ./antman --patch=glibc
-	cd ../..
-	if ! [ -d "$TC_DIR" ]; then
-		echo "Cloning failed! Aborting..."
-		exit 1
-	fi
-fi
-
-cd "$TC_DIR" && bash ./antman -U && cd ../..
 
 if [[ $1 = "-r" || $1 = "--regen" ]]; then
 	make O=out ARCH=arm64 $DEFCONFIG savedefconfig
