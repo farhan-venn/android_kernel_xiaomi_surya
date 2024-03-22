@@ -8,7 +8,6 @@ jobs:
           no_output_timeout: 50m
           command: |
            git clone https://github.com/farhan-venn/android_kernel_xiaomi_surya/ -b master
-           cd master
            chmod +x android_kernel_xiaomi_surya/clang-setup.sh
            chmod +x android_kernel_xiaomi_surya/surya.sh
            source android_kernel_xiaomi_surya/clang-setup.sh
