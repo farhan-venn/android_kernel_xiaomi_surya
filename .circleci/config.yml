@@ -10,16 +10,6 @@ jobs:
            git clone github.com/farhan-venn/android_kernel_xiaomi_surya/ -b master
            chmod +x android_kernel_xiaomi_surya/build.sh
            ./android_kernel_xiaomi_surya/build.sh
-      - name: Upload to Telegram
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          document: ${{ env.ZIPNAME }}
-          message: |
-             ${{ env.BUILD_DATE }}
-             
-             ${{ env.HEAD_COMMIT }}
 workflows:
   version: 2.1
   cooking:
