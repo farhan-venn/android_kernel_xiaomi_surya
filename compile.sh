@@ -18,7 +18,7 @@ export KBUILD_BUILD_HOST=Farhan
 
 # change TC_DIR(directory) on where you clone clang toolchain
 
-export PATH="$HOME/toolchains/proton-clang/bin:$PATH"
+export PATH="$HOME/workspace/clang-17/bin:$PATH"
 
 # do not modify export PATCH it's been including with TC_DIR
 
