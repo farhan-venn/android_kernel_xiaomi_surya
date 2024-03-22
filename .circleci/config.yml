@@ -8,9 +8,9 @@ jobs:
           no_output_timeout: 50m
           command: |
            git clone https://github.com/farhan-venn/android_kernel_xiaomi_surya -b master
-           git clone https://github.com/kdrag0n/proton-clang -b master /workspace/clang-17
-           chmod +x android_kernel_xiaomi_surya/compile.sh
-           ./android_kernel_xiaomi_surya/compile.sh
+           git clone https://github.com/kdrag0n/proton-clang -b master /workspace/clang
+           chmod +x android_kernel_xiaomi_surya/surya.sh
+           ./android_kernel_xiaomi_surya/surya.sh
 workflows:
   version: 2.1
   cooking:
