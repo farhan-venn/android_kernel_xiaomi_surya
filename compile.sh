@@ -18,7 +18,7 @@ export KBUILD_BUILD_HOST=Farhan
 
 # change TC_DIR(directory) on where you clone clang toolchain
 
-# TC_DIR="/home/raven/kernel/clang-17"
+TC_DIR="$(pwd)/tc/clang-neutron"
 
 # do not modify export PATCH it's been including with TC_DIR
 
