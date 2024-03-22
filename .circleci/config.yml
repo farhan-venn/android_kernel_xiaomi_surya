@@ -1,13 +1,9 @@
-name: Build Kernel
-
-on:
-  workflow_dispatch:
-
+version: 2.1
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
+  compile:
+   docker:
+      - image: ghcr.io/neutron-toolchains/docker-image:arch-neutron
+   steps:
       - name: Checkout
         uses: actions/checkout@main
 
@@ -49,3 +45,8 @@ jobs:
              ${{ env.BUILD_DATE }}
              
              ${{ env.HEAD_COMMIT }}
+workflows:
+  version: 2.1
+  cooking:
+    jobs:
+      - compile
