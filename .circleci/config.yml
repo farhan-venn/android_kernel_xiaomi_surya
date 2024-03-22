@@ -7,9 +7,13 @@ jobs:
       - run:
           no_output_timeout: 50m
           command: |
-           git clone github.com/farhan-venn/android_kernel_xiaomi_surya/ -b master
-           chmod +x android_kernel_xiaomi_surya/build.sh
-           ./android_kernel_xiaomi_surya/build.sh
+           git clone https://github.com/farhan-venn/android_kernel_xiaomi_surya -b kernel
+           cd kernel
+           git clone https://github.com/farhan-venn/myscripts.git -b main
+           chmod +x myscripts/clang-setup.sh
+           chmod +x myscripts/surya.sh
+           source ./myscripts/clang-setup.sh
+           ./myscripts/surya.sh
 workflows:
   version: 2.1
   cooking:
