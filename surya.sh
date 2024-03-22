@@ -92,31 +92,33 @@ kernelstringfix() {
 # Make the kernel
 makekernel() {
     # Clean any old AnyKernel
-    rm -rf ${ANYKERNEL}
+    rm -rf "${ANYKERNEL}"
     git clone https://github.com/farhan-venn/AnyKernel3 -b Raven
     kernelstringfix
-    make O=out ARCH=arm64 ${DEFCONFIG}
+    make O=out ARCH=arm64 "${DEFCONFIG}"
     if [[ "${COMPILER_TYPE}" =~ "clang"* ]]; then
         make -j$(nproc --all) \
-	O=out \
-	CC="${ccache_} clang" \
-	AS=llvm-as \
-	LD=ld.lld \
-	AR=llvm-ar \
-	NM=llvm-nm \
-	STRIP=llvm-strip \
-	OBJCOPY=llvm-objcopy \
-	OBJDUMP=llvm-objdump \
+        O=out \
+        CC="${ccache_} clang" \
+        AS=llvm-as \
+        LD=ld.lld \
+        AR=llvm-ar \
+        NM=llvm-nm \
+        STRIP=llvm-strip \
+        OBJCOPY=llvm-objcopy \
+        OBJDUMP=llvm-objdump
+    fi
 
     # Check if compilation is done successfully.
     if ! [ -f "${OUTFILE}" ]; then
-	    END=$(date +"%s")
-	    DIFF=$(( END - START ))
-	    echo -e "Kernel compilation failed, See buildlog to fix errors"
-	    tg_channelcast "Build for ${DEVICE} <b>failed</b> in $((DIFF / 60)) minute(s) and $((DIFF % 60)) second(s)! Check ${CIPROVIDER} for errors!"
-	    exit 1
+        END=$(date +"%s")
+        DIFF=$(( END - START ))
+        echo -e "Kernel compilation failed, See buildlog to fix errors"
+        tg_channelcast "Build for ${DEVICE} <b>failed</b> in $((DIFF / 60)) minute(s) and $((DIFF % 60)) second(s)! Check ${CIPROVIDER} for errors!"
+        exit 1
     fi
 }
+
 
 # Ship the compiled kernel
 shipkernel() {
