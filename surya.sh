@@ -74,11 +74,9 @@ setversioning() {
 # Send to channel
 tg_channelcast() {
     "${TELEGRAM}" -c "${CI_CHANNEL}" -H \
-    "$(2
-		for POST in "${@}"; do
-			echo "${POST}"
-		done
-    )"
+    "$(for POST in "${@}"; do
+        echo "${POST}"
+    done)"
 }
 
 # Fix long kernel strings
