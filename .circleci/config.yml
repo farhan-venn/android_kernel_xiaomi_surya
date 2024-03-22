@@ -9,11 +9,8 @@ jobs:
           command: |
            git clone https://github.com/farhan-venn/android_kernel_xiaomi_surya -b master kernel
            cd kernel
-           git clone https://github.com/farhan-venn/myscripts.git -b main
-           chmod +x myscripts/clang-setup.sh
-           chmod +x myscripts/surya.sh
-           source ./myscripts/clang-setup.sh
-           ./myscripts/surya.sh
+           chmod +x android_kernel_xiaomi_surya/compile.sh
+           ./android_kernel_xiaomi_surya/compile.sh
 workflows:
   version: 2.1
   cooking:
