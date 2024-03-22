@@ -4,12 +4,8 @@ jobs:
    docker:
       - image: ghcr.io/neutron-toolchains/docker-image:arch-neutron
    steps:
-      - run:
-          no_output_timeout: 50m
-          command: |
-           git clone https://github.com/farhan-venn/android_kernel_xiaomi_surya -b test
-           chmod +x android_kernel_xiaomi_surya/surya_script.sh
-           ./android_kernel_xiaomi_surya/surya_script.sh
+      - run: |
+        source build.sh
 workflows:
   version: 2.1
   cooking:
