@@ -17,17 +17,9 @@ COMPILER_TYPES=clang
 
 # Pick your poison
 if [[ "${COMPILER_TYPES}" =~ "clang" ]]; then
-        git clone https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86 -b main --depth=1  "${KERNELDIR}/clang"
-	git clone https://github.com/Kyvangka1610/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu --depth=1 "${KERNELDIR}/gcc"
-        git clone https://github.com/Kyvangka1610/gcc-arm-10.2-2020.11-x86_64-arm-none-linux-gnueabihf --depth=1 "${KERNELDIR}/gcc32"
-	COMPILER_STRING='google clang 17'
-        COMPILER_TYPE='google clang 17'
-else
-        # Default to GCC from Arter
-        git clone https://github.com/mvaisakh/gcc-arm64 -b gcc-master --depth=1 "${KERNELDIR}/gcc"
-        git clone https://github.com/kdrag0n/arm-eabi-gcc --depth=1 "${KERNELDIR}/gcc32"
-        COMPILER_STRING='GCC'
-	COMPILER_TYPE='GCC'
+        git clone https://github.com/kdrag0n/proton-clang -b master --depth=1  "${KERNELDIR}/workspace/clang"
+	COMPILER_STRING='Proton clang'
+        COMPILER_TYPE='Proton clang'
 fi    
 
 export COMPILER_STRING COMPILER_TYPE KERNELDIR SCRIPTS OUTDIR
