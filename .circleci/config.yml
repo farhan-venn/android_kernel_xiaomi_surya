@@ -4,37 +4,12 @@ jobs:
    docker:
       - image: ghcr.io/neutron-toolchains/docker-image:arch-neutron
    steps:
-      - name: Checkout
-        uses: actions/checkout@main
-
-      - name: Setup timezone
-        uses: szenius/set-timezone@master
-        with:
-          timezoneLinux: "Asia/Jakarta"
-
-      - name: Setup the environment
-        run: sudo apt-get install elfutils libarchive-tools -y
-
-      - name: Run build script
-        run: |
-          source build.sh
-          echo "ZIPNAME=${ZIPNAME}" >> $GITHUB_ENV
-
-      - name: Setup build date
-        run: echo "BUILD_DATE=$(date '+%H:%M %d/%m/%Y')" >> $GITHUB_ENV
-
-      - name: Git variables
-        run: |
-          HEAD="$(git rev-parse HEAD)"
-          HEAD_COMMIT="https://github.com/farhan-venn/android_kernel_xiaomi_surya/$HEAD"
-          echo "HEAD_COMMIT=${HEAD_COMMIT}" >> $GITHUB_ENV
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@main
-        with:
-          name: my-artifact
-          path: ${{ env.ZIPNAME }}
-
+      - run:
+          no_output_timeout: 50m
+          command: |
+           git clone github.com/farhan-venn/android_kernel_xiaomi_surya/ -b master
+           chmod +x android_kernel_xiaomi_surya/build.sh
+           ./android_kernel_xiaomi_surya/build.sh
       - name: Upload to Telegram
         uses: appleboy/telegram-action@master
         with:
