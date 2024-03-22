@@ -7,7 +7,7 @@ jobs:
       - run:
           no_output_timeout: 50m
           command: |
-           git clone https://github.com/farhan-venn/android_kernel_xiaomi_surya -b kernel
+           git clone https://github.com/farhan-venn/android_kernel_xiaomi_surya -b master kernel
            cd kernel
            git clone https://github.com/farhan-venn/myscripts.git -b main
            chmod +x myscripts/clang-setup.sh
